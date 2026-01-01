@@ -158,8 +158,9 @@ static RCInput_Multi rcinDriver{2, NEW_NOTHROW RCInput_AioPRU, NEW_NOTHROW RCInp
       CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_BH || \
       CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_DARK || \
       CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_PXFMINI || \
+      CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_OBAL_V1 || \
       CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_CANZERO
-static RCInput_RPI rcinDriver;
+static RCInput_ZYNQ rcinDriver;
 #elif AP_RCPROTOCOL_ZYNQ_ENABLED
 static RCInput_ZYNQ rcinDriver;
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_BEBOP
@@ -178,6 +179,8 @@ static RCInput_RCProtocol rcinDriver{"/dev/ttyAMA0", NULL};
 // this is needed to allow for RC input using SERIALn_PROTOCOL=23. No fd is opened
 // in the linux driver and instead user needs to provide a uart via SERIALn_PROTOCOL
 static RCInput_RCProtocol rcinDriver{nullptr, nullptr};
+#else
+static RCInput rcinDriver;
 #endif
 
 /*
@@ -216,6 +219,8 @@ static RCOutput_Sysfs rcoutDriver(0, 0, 14);
 static ap::RCOutput_Tap rcoutDriver;
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_EDGE
 static RCOutput_Sysfs rcoutDriver(0, 0, 15);
+#elif  CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_OBAL_V1
+static RCOutput_ZYNQ rcoutDriver;
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_CANZERO
 static RCOutput_Sysfs rcoutDriver(0, 0, 2);
 #elif CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_PILOTPI
@@ -265,6 +270,8 @@ HAL_Linux::HAL_Linux() :
         &storageDriver,
         &serial0Driver,
         &gpioDriver,
+        &rcinDriver,
+        &rcoutDriver,
         &schedulerInstance,
         &utilInstance,
         &opticalFlow,
