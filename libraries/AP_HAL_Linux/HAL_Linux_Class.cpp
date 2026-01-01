@@ -178,8 +178,6 @@ static RCInput_RCProtocol rcinDriver{"/dev/ttyAMA0", NULL};
 // this is needed to allow for RC input using SERIALn_PROTOCOL=23. No fd is opened
 // in the linux driver and instead user needs to provide a uart via SERIALn_PROTOCOL
 static RCInput_RCProtocol rcinDriver{nullptr, nullptr};
-#else
-static RCInput rcinDriver;
 #endif
 
 /*

@@ -1,7 +1,7 @@
 # Open Board Architecture for Linux
 
 # IMUs:
-IMU Invensense I2C:0:0x68 ROTATION_NONE
+IMU Invensense I2C:1:0x68 ROTATION_NONE
 define INS_MAX_INSTANCES 3
 
 # Compasses:
