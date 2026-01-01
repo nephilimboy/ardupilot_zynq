@@ -265,8 +265,6 @@ HAL_Linux::HAL_Linux() :
         &storageDriver,
         &serial0Driver,
         &gpioDriver,
-        &rcinDriver,
-        &rcoutDriver,
         &schedulerInstance,
         &utilInstance,
         &opticalFlow,
