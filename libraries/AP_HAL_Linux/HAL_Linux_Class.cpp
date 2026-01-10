@@ -231,7 +231,7 @@ static RCOutput_Sysfs rcoutDriver(0, 0, 7);
 #else
 static Empty::RCOutput rcoutDriver;
 #endif
-
+ 
 static Scheduler schedulerInstance;
 
 #if CONFIG_HAL_BOARD_SUBTYPE == HAL_BOARD_SUBTYPE_LINUX_BEBOP
